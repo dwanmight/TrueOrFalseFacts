@@ -11,6 +11,8 @@ import android.widget.Button;
  */
 public class FirstActivity extends Activity {
     private Button btnNewGame,btnContinuegame;
+    public static final String EXTRA_START_GAME="com.junior.dwan.geoquiz.start_game";
+    public static int startGame = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,18 @@ public class FirstActivity extends Activity {
         btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startGame=0;
+                Intent i=new Intent(FirstActivity.this,GameActivity.class);
+                startActivity(i);
+            }
+        });
+
+        btnContinuegame=(Button)findViewById(R.id.btnContinueGame);
+        btnContinuegame.setEnabled(false);
+        btnContinuegame.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+//                startGame=???????
                 Intent i=new Intent(FirstActivity.this,GameActivity.class);
                 startActivity(i);
             }
