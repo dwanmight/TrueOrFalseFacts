@@ -23,8 +23,9 @@ public class FirstActivity extends Activity {
         btnNewGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startGame=0;
+                startGame=1;
                 Intent i=new Intent(FirstActivity.this,GameActivity.class);
+                i.putExtra(EXTRA_START_GAME,startGame);
                 startActivity(i);
             }
         });
@@ -34,7 +35,8 @@ public class FirstActivity extends Activity {
         btnContinuegame.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-//                startGame=???????
+// if(startGame>2)
+// startGame=???????
                 Intent i=new Intent(FirstActivity.this,GameActivity.class);
                 startActivity(i);
             }

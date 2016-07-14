@@ -39,12 +39,6 @@ public class CheatActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cheat);
 
-
-        mTvApiLvl=(TextView)findViewById(R.id.tvApiLvl);
-        mTvApiLvl.setText("API level "+Build.VERSION.SDK);
-
-
-
         setAnswerShownResult(false);
 
         mAnswerIsTrue=getIntent().getBooleanExtra(EXTRA_ANSWER_IS_TRUE,false);
