@@ -17,7 +17,14 @@ public class FirstActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
-
+        btnNewGame=(Button)findViewById(R.id.btnNewGame);
+        btnNewGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(FirstActivity.this,GameActivity.class);
+                startActivity(i);
+            }
+        });
 
 
 
