@@ -5,18 +5,13 @@ package com.junior.dwan.geoquiz;
 
 import android.app.Activity;
 import android.content.Intent;
-
-
 import android.os.Bundle;
-
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends Activity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
@@ -109,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         mCheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            Intent i=new Intent(MainActivity.this,CheatActivity.class);
+            Intent i=new Intent(GameActivity.this,CheatActivity.class);
                 boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
                 i.putExtra(CheatActivity.EXTRA_ANSWER_IS_TRUE, answerIsTrue);
                 startActivityForResult(i,0);
