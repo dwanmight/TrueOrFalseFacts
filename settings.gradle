@@ -1,0 +1,1 @@
+include ':app', ':p0411_layoutinflaterlist', ':geoquiz', ':test_geoquiz', ':criminalintent', ':fortest', ':hellomoon', ':rgbcircles', ':p1071_actionbaritems'
