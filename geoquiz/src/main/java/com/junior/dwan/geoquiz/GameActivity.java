@@ -1,8 +1,4 @@
 package com.junior.dwan.geoquiz;
-
-
-
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends Activity {
     private Button mTrueButton;
@@ -31,11 +29,14 @@ public class GameActivity extends Activity {
             new TrueFalse(R.string.question_asia, true)
     };
 
-    private int mCurrentIndex = 0;
+    private int mCurrentIndex=0;
+    private void checkContinue(){
+        Intent i=getIntent();
+       if(i.getIntExtra(FirstActivity.EXTRA_START_GAME,0)==-1) mCurrentIndex=0;
+        else mCurrentIndex=i.getIntExtra(FirstActivity.EXTRA_START_GAME,0);
+    }
 
     private void updateQuestion() {
-
-
         int question = mQuestionBank[mCurrentIndex].getQuestion();
         mQuestionTextView.setText(question);
     }
@@ -67,13 +68,13 @@ public class GameActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_game);
 
 
         mIsCheater = false;
 
         mQuestionTextView = (TextView) findViewById(R.id.tvQuestions);
+
 
         mTrueButton = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
@@ -83,6 +84,9 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 checkAnswer(true);
 
+                mCurrentIndex+=1;
+                updateQuestion();
+
             }
         });
 
@@ -90,6 +94,9 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
+
+                mCurrentIndex+=1;
+                updateQuestion();
             }
         });
 
@@ -108,7 +115,9 @@ public class GameActivity extends Activity {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
             mIsCheater = savedInstanceState.getBoolean(KEY_INTENT_DATA, false);
         }
+        checkContinue();
         updateQuestion();
+
     }
 
     @Override
