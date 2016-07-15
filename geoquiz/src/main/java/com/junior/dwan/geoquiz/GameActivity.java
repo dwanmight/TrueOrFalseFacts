@@ -7,7 +7,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.concurrent.TimeUnit;
 
 public class GameActivity extends Activity {
     private Button mTrueButton;
@@ -43,7 +42,6 @@ public class GameActivity extends Activity {
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
-
         int mesResId = 0;
         if (mIsCheater) {
             if (userPressedTrue == answerIsTrue) {
@@ -58,10 +56,7 @@ public class GameActivity extends Activity {
                 mesResId = R.string.incorrect_toast;
             }
         }
-
-
         Toast.makeText(this, mesResId, Toast.LENGTH_SHORT).show();
-
     }
 
 
@@ -69,24 +64,16 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
-
         mIsCheater = false;
-
         mQuestionTextView = (TextView) findViewById(R.id.tvQuestions);
-
-
         mTrueButton = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
-
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
-
                 mCurrentIndex+=1;
                 updateQuestion();
-
             }
         });
 
@@ -94,7 +81,6 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
-
                 mCurrentIndex+=1;
                 updateQuestion();
             }
@@ -110,7 +96,6 @@ public class GameActivity extends Activity {
                 startActivityForResult(i, 0);
             }
         });
-
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
             mIsCheater = savedInstanceState.getBoolean(KEY_INTENT_DATA, false);
@@ -123,7 +108,6 @@ public class GameActivity extends Activity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         savedInstanceState.putBoolean(KEY_INTENT_DATA, mIsCheater);
     }
