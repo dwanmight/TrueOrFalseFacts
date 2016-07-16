@@ -4,14 +4,32 @@
     android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvScore"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="15dp"
-        android:text="score"/>
+        android:orientation="horizontal"
+        android:gravity="right">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/btnAnswer"
+            android:text="@string/show_answer_button"
+            style="?android:buttonBarButtonStyle"
+            android:clickable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvScore"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/score"/>
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,7 +41,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_centerVertical="true"
         android:layout_below="@id/tvQuestions"
         android:id="@+id/linlayout1">
         <Button
@@ -34,7 +51,8 @@
             android:id="@+id/true_button"
             android:layout_weight="1"
             android:layout_marginRight="5dp"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="30dp"
+            style="?android:buttonBarButtonStyle"/>
         <Button
             android:textSize="16sp"
             android:layout_width="match_parent"
@@ -43,20 +61,14 @@
             android:id="@+id/false_button"
             android:layout_weight="1"
             android:layout_marginRight="30dp"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            style="?android:buttonBarButtonStyle"/>
     </LinearLayout>
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:id="@+id/btnAnswer"
-        android:text="@string/show_answer_button"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btnAnswer"
+        android:layout_above="@+id/tvQuestions"
+        android:layout_marginBottom="15dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/tvAnswer"
         android:textSize="12sp"
