@@ -7,17 +7,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 public class GameActivity extends Activity {
     private Button mTrueButton;
     private Button mFalseButton;
-    private Button mCheatButton;
-
-
+    private Button mAnswerButton;
+    private TextView tvAnswer;
+    private TextView tvScore;
     private TextView mQuestionTextView;
     private boolean mIsCheater;
     private static final String KEY_INDEX = "index";
     private static final String KEY_INTENT_DATA = "intentData";
+    public static final String KEY_SCORE="score";
+    private boolean answerIsTrue;
 
 
     private TrueFalse[] mQuestionBank = new TrueFalse[]{
@@ -29,11 +30,14 @@ public class GameActivity extends Activity {
     };
 
     private int mCurrentIndex=0;
+    private int score=0;
     private void checkContinue(){
         Intent i=getIntent();
        if(i.getIntExtra(FirstActivity.EXTRA_START_GAME,0)==-1) mCurrentIndex=0;
         else mCurrentIndex=i.getIntExtra(FirstActivity.EXTRA_START_GAME,0);
     }
+
+
 
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getQuestion();
@@ -46,14 +50,21 @@ public class GameActivity extends Activity {
         if (mIsCheater) {
             if (userPressedTrue == answerIsTrue) {
                 mesResId = R.string.judgment_toast;
+                score+=1;
+                tvScore.setText("Score: "+score);
             } else {
                 mesResId = R.string.incorrect_judgement_toast;
+                tvScore.setText("Score: "+score);
             }
         } else {
-            if (userPressedTrue == answerIsTrue)
+            if (userPressedTrue == answerIsTrue){
                 mesResId = R.string.correct_toast;
+                score+=2;
+                tvScore.setText("Score: "+score);
+            }
             else {
                 mesResId = R.string.incorrect_toast;
+                tvScore.setText("Score: "+score);
             }
         }
         Toast.makeText(this, mesResId, Toast.LENGTH_SHORT).show();
@@ -65,6 +76,12 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mIsCheater = false;
+        if (savedInstanceState != null) {
+            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
+            mIsCheater = savedInstanceState.getBoolean(KEY_INTENT_DATA, false);
+            score = savedInstanceState.getInt(KEY_SCORE,0);
+        }
+        score=0;
         mQuestionTextView = (TextView) findViewById(R.id.tvQuestions);
         mTrueButton = (Button) findViewById(R.id.true_button);
         mFalseButton = (Button) findViewById(R.id.false_button);
@@ -72,7 +89,9 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
-                mCurrentIndex+=1;
+                mIsCheater=false;
+                tvAnswer.setText("");
+                mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
                 updateQuestion();
             }
         });
@@ -81,28 +100,31 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
-                mCurrentIndex+=1;
+                mIsCheater=false;
+                tvAnswer.setText("");
+                mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
                 updateQuestion();
             }
         });
-
-        mCheatButton = (Button) findViewById(R.id.cheatButton);
-        mCheatButton.setOnClickListener(new View.OnClickListener() {
+        tvScore=(TextView)findViewById(R.id.tvScore);
+        tvScore.setText("Score: "+score);
+        tvAnswer=(TextView)findViewById(R.id.tvAnswer);
+        mAnswerButton = (Button) findViewById(R.id.btnAnswer);
+        mAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(GameActivity.this, CheatActivity.class);
-                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
-                i.putExtra(CheatActivity.EXTRA_ANSWER_IS_TRUE, answerIsTrue);
-                startActivityForResult(i, 0);
+                answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
+                if(answerIsTrue) {
+                    tvAnswer.setText(R.string.true_button);
+                    mIsCheater=true;
+                }else {
+                    tvAnswer.setText(R.string.false_button);
+                    mIsCheater=true;
+                }
             }
         });
-        if (savedInstanceState != null) {
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
-            mIsCheater = savedInstanceState.getBoolean(KEY_INTENT_DATA, false);
-        }
         checkContinue();
         updateQuestion();
-
     }
 
     @Override
@@ -110,11 +132,6 @@ public class GameActivity extends Activity {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         savedInstanceState.putBoolean(KEY_INTENT_DATA, mIsCheater);
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data == null) return;
-        mIsCheater = data.getBooleanExtra(CheatActivity.EXTRA_ANSWER_SHOWN, false);
+        savedInstanceState.putInt(KEY_SCORE,score);
     }
 }
