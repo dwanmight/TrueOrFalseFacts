@@ -51,10 +51,14 @@ public class GameActivity extends Activity {
             if (userPressedTrue == answerIsTrue) {
                 mesResId = R.string.judgment_toast;
                 score+=1;
-                tvScore.setText("Score: "+score);
+                tvScore.setText("Score: " + score);
+                mTrueButton.setBackgroundResource(R.drawable.rect_button);
+                mFalseButton.setBackgroundResource(R.drawable.rect_button);
             } else {
                 mesResId = R.string.incorrect_judgement_toast;
                 tvScore.setText("Score: "+score);
+                mTrueButton.setBackgroundResource(R.drawable.rect_button);
+                mFalseButton.setBackgroundResource(R.drawable.rect_button);
             }
         } else {
             if (userPressedTrue == answerIsTrue){
@@ -116,10 +120,12 @@ public class GameActivity extends Activity {
                 answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
                 if(answerIsTrue) {
                     tvAnswer.setText(R.string.true_button);
+                    mTrueButton.setBackgroundResource(R.drawable.answer_btn);
                     mIsCheater=true;
                 }else {
                     tvAnswer.setText(R.string.false_button);
                     mIsCheater=true;
+                    mFalseButton.setBackgroundResource(R.drawable.answer_btn);
                 }
             }
         });

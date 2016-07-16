@@ -3,14 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/FrameLayout1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/weather">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="right">
-
+        android:id="@+id/linlayout2"
+        android:gravity="center">
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,16 +28,26 @@
             android:id="@+id/tvScore"
             android:layout_marginTop="5dp"
             android:layout_marginRight="10dp"
+            android:layout_marginLeft="200dp"
             android:text="@string/score"/>
     </LinearLayout>
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:background="@drawable/separator"
+        android:layout_below="@id/linlayout2"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="24dp"
         android:id="@+id/tvQuestions"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:background="@drawable/rect_button"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,7 +63,7 @@
             android:layout_weight="1"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="30dp"
-            style="?android:buttonBarButtonStyle"/>
+            android:background="@drawable/rect_button"/>
         <Button
             android:textSize="16sp"
             android:layout_width="match_parent"
@@ -62,7 +73,7 @@
             android:layout_weight="1"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="5dp"
-            style="?android:buttonBarButtonStyle"/>
+            android:background="@drawable/rect_button"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"

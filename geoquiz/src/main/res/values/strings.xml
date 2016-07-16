@@ -14,7 +14,7 @@
 
     <string name="cheat_button">Cheat!</string>
     <string name="warning_text">Are you sure to do that?</string>
-    <string name="show_answer_button">Answer</string>
+    <string name="show_answer_button">Show answer</string>
     <string name="judgment_toast">Cheating is wrong.</string>
     <string name="incorrect_judgement_toast">You do not cheat very well. \nStick to guessing.</string>
 
