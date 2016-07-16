@@ -7,6 +7,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.concurrent.TimeUnit;
+
 public class GameActivity extends Activity {
     private Button mTrueButton;
     private Button mFalseButton;
@@ -42,6 +44,11 @@ public class GameActivity extends Activity {
     private void updateQuestion() {
         int question = mQuestionBank[mCurrentIndex].getQuestion();
         mQuestionTextView.setText(question);
+        mTrueButton.setBackgroundResource(R.drawable.rect_button);
+        mFalseButton.setBackgroundResource(R.drawable.rect_button);
+        mAnswerButton.setEnabled(true);
+        tvAnswer.setText("");
+        mIsCheater=false;
     }
 
     private void checkAnswer(boolean userPressedTrue) {
@@ -52,27 +59,31 @@ public class GameActivity extends Activity {
                 mesResId = R.string.judgment_toast;
                 score+=1;
                 tvScore.setText("Score: " + score);
-                mTrueButton.setBackgroundResource(R.drawable.rect_button);
-                mFalseButton.setBackgroundResource(R.drawable.rect_button);
+
             } else {
                 mesResId = R.string.incorrect_judgement_toast;
-                tvScore.setText("Score: "+score);
-                mTrueButton.setBackgroundResource(R.drawable.rect_button);
-                mFalseButton.setBackgroundResource(R.drawable.rect_button);
+                tvScore.setText("Score: " + score);
             }
         } else {
             if (userPressedTrue == answerIsTrue){
                 mesResId = R.string.correct_toast;
                 score+=2;
+
                 tvScore.setText("Score: "+score);
             }
             else {
                 mesResId = R.string.incorrect_toast;
-                tvScore.setText("Score: "+score);
+                tvScore.setText("Score: " + score);
+//                checkTrueColor();
             }
         }
         Toast.makeText(this, mesResId, Toast.LENGTH_SHORT).show();
     }
+
+//    private void checkTrueColor(Boolean b) {
+//        Boolean answe
+//        Boolean check=
+//    }
 
 
     @Override
@@ -92,22 +103,35 @@ public class GameActivity extends Activity {
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer(true);
-                mIsCheater=false;
-                tvAnswer.setText("");
-                mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
-                updateQuestion();
+                try {
+                    mTrueButton.setBackgroundResource(R.drawable.choice_btn);
+                    TimeUnit.MILLISECONDS.sleep(50);
+                    checkAnswer(true);
+
+
+                    mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
+                    updateQuestion();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkAnswer(false);
-                mIsCheater=false;
-                tvAnswer.setText("");
-                mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
-                updateQuestion();
+                mFalseButton.setBackgroundResource(R.drawable.choice_btn);
+//                try {
+//                    mFalseButton.setBackgroundResource(R.drawable.choice_btn);
+//                    TimeUnit.SECONDS.wait(2);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                } finally {
+//                    checkAnswer(false);
+//                    mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
+//                    updateQuestion();
+//                }
+
             }
         });
         tvScore=(TextView)findViewById(R.id.tvScore);
@@ -119,10 +143,20 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                 answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
                 if(answerIsTrue) {
-                    tvAnswer.setText(R.string.true_button);
                     mTrueButton.setBackgroundResource(R.drawable.answer_btn);
+                    mAnswerButton.setEnabled(false);
+                    tvAnswer.setText(R.string.true_button);
                     mIsCheater=true;
+                    try{
+                        TimeUnit.SECONDS.wait(3);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                        mTrueButton.setBackgroundResource(R.drawable.choice_btn);
+                    }
+
                 }else {
+                    mAnswerButton.setEnabled(false);
                     tvAnswer.setText(R.string.false_button);
                     mIsCheater=true;
                     mFalseButton.setBackgroundResource(R.drawable.answer_btn);

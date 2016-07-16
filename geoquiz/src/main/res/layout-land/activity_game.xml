@@ -40,7 +40,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="24dp"
+        android:padding="30dp"
+        android:paddingLeft="100dp"
         android:id="@+id/tvQuestions"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
