@@ -6,21 +6,21 @@ import java.util.UUID;
  * Created by Might on 25.01.2016.
  */
 public class Fact {
-    private int mQuestion;
+    private String mQuestion;
     private boolean mTrueQuestion;
 
 
 
-    public Fact(int question, boolean trueQuestion){
+    public Fact(String question, boolean trueQuestion){
         mQuestion=question;
         mTrueQuestion=trueQuestion;
     }
 
 
-    public int getQuestion(){
+    public String getQuestion(){
         return mQuestion;
     }
-    public void setQuestion(int question){
+    public void setQuestion(String question){
         mQuestion=question;
     }
 

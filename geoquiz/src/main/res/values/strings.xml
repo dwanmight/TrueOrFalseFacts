@@ -26,13 +26,13 @@
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
 
-    <array name="factsArray">
+    <string-array name="factsArray">
     <item>@string/question_oceans</item>
     <item>@string/question_mideast</item>
     <item>@string/question_africa</item>
     <item>@string/question_americas</item>
     <item>@string/question_asia</item>
-    </array>
+    </string-array>
 
     <array name="factsBoolean">
         <item>true</item>

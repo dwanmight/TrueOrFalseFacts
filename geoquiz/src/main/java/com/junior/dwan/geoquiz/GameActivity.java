@@ -12,6 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class GameActivity extends Activity {
 
     private Button mTrueButton;
@@ -25,17 +27,16 @@ public class GameActivity extends Activity {
     private static final String KEY_INDEX = "index";
     private static final String KEY_INTENT_DATA = "intentData";
     public static final String KEY_SCORE = "score";
-    private String[] arrayFacts;
-    private boolean[] arrayBoolean;
+    private ArrayList<Fact> mFacts;
 
 
-    private Fact[] mQuestionBank = new Fact[]{
-            new Fact(R.string.question_oceans, true),
-            new Fact(R.string.question_mideast, false),
-            new Fact(R.string.question_africa, false),
-            new Fact(R.string.question_americas, true),
-            new Fact(R.string.question_asia, true)
-    };
+//    private Fact[] mQuestionBank = new Fact[]{
+//            new Fact(R.string.question_oceans, true),
+//            new Fact(R.string.question_mideast, false),
+//            new Fact(R.string.question_africa, false),
+//            new Fact(R.string.question_americas, true),
+//            new Fact(R.string.question_asia, true)
+//    };
 
     private int mCurrentIndex = 0;
     private int score = 0;
@@ -48,7 +49,7 @@ public class GameActivity extends Activity {
 
 
     private void updateQuestion() {
-        int question = mQuestionBank[mCurrentIndex].getQuestion();
+        String question = mFacts.get(mCurrentIndex).getQuestion();
         mQuestionTextView.setText(question);
         mTrueButton.setBackgroundResource(R.drawable.main_background);
         mFalseButton.setBackgroundResource(R.drawable.main_background);
@@ -57,7 +58,7 @@ public class GameActivity extends Activity {
     }
 
     private void checkAnswer(boolean userPressedTrue) {
-        boolean answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
+        boolean answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
         int mesResId = 0;
         if (mIsCheater) {
             if (userPressedTrue == answerIsTrue) {
@@ -92,7 +93,7 @@ public class GameActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-
+        mFacts=FactLab.getInstance(this).getFacts();
         // активация кнопки home
         if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
             if(NavUtils.getParentActivityName(this)!=null){
@@ -115,7 +116,7 @@ public class GameActivity extends Activity {
             public void onClick(View v) {
                     checkAnswer(true);
                 mTrueButton.setBackgroundResource(R.drawable.main_background);
-                    mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
+                    mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
                     updateQuestion();
 
             }
@@ -127,7 +128,7 @@ public class GameActivity extends Activity {
                     checkAnswer(false);
                 mFalseButton.setBackgroundResource(R.drawable.main_background);
 
-                mCurrentIndex=(mCurrentIndex+1)%mQuestionBank.length;
+                mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
                     updateQuestion();
             }
         });
@@ -138,7 +139,7 @@ public class GameActivity extends Activity {
         mAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
+                answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
                 if(answerIsTrue) {
 
                     mTrueButton.setBackgroundResource(R.drawable.main_background_answer);

@@ -20,14 +20,9 @@ public class FactLab {
 
 
     private FactLab(Context appContext) {
-        TypedArray ar = mAppContext.getResources().obtainTypedArray(R.array.factsArray);
-        int len = ar.length();
-        int[] factsQuests = new int[len];
-        for (int i = 0; i < len; i++)
-            factsQuests[i] = ar.getInteger(i,0);
-        ar.recycle();
+        factArray=appContext.getResources().getStringArray(R.array.factsArray);
 
-        TypedArray bo = mAppContext.getResources().obtainTypedArray(R.array.factsBoolean);
+        TypedArray bo = appContext.getResources().obtainTypedArray(R.array.factsBoolean);
         int lenBo = bo.length();
         Boolean[] factsBoolean = new Boolean[lenBo];
         for (int i = 0; i < lenBo; i++)
@@ -35,8 +30,8 @@ public class FactLab {
         bo.recycle();
 
         mFacts=new ArrayList<Fact>();
-        for (int i = 0; i <=5; i++) {
-           Fact f=new Fact(factsQuests[i],factsBoolean[i]);
+        for (int i = 0; i <=4; i++) {
+           Fact f=new Fact(factArray[i],factsBoolean[i]);
             mFacts.add(f);
         }
     }
@@ -44,23 +39,11 @@ public class FactLab {
     public static FactLab getInstance(Context c) {
         if(sFactLab==null) {
             sFactLab=new FactLab(c.getApplicationContext());
-
         }
         return sFactLab;
     }
 
-//    public Fact getFact(UUID id){
-//        for(Fact f:mFacts){
-//            if(f.getId().equals(id))
-//                return f;
-//
-//        }
-//        return null;
-//    }
-
     public ArrayList<Fact> getFacts() {
         return mFacts;
     }
-
-
 }
