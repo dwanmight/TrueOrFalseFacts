@@ -4,9 +4,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:background="@drawable/weather">
-                <!--android:background="#2bd3ce"-->
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,12 +14,10 @@
         <Button
             android:textSize="12sp"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btnAnswer"
             android:text="@string/show_answer_button"
-            android:clickable="true"
             style="?android:buttonBarStyle"/>
 
         <TextView
@@ -39,26 +34,30 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:id="@+id/tvAnswer"
+        android:text="@string/point_textview"
+        android:id="@+id/tvPoint"
         android:padding="24dp"
-        android:layout_above="@+id/tvQuestions"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/separator"
         android:layout_centerHorizontal="true"/>
     <View
         android:layout_width="wrap_content"
         android:layout_height="1dp"
+        android:id="@+id/separator"
         android:background="@drawable/separator"
         android:layout_below="@id/linlayout2"/>
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120dp"
         android:gravity="center"
         android:padding="30dp"
         android:id="@+id/tvQuestions"
         android:background="@drawable/rect_button"
-        android:layout_above="@+id/linlayout1"
+        android:layout_below="@+id/tvPoint"
         android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"/>
     <!--<View-->
         <!--android:layout_width="wrap_content"-->
@@ -69,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_centerVertical="true"
+        android:layout_below="@id/tvQuestions"
         android:id="@+id/linlayout1"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp">
@@ -83,8 +82,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/rect_button"
-            android:clickable="true" />
+            android:background="@drawable/main_background"/>
         <Button
             android:textSize="16sp"
             android:layout_width="match_parent"
@@ -95,7 +93,6 @@
             android:layout_marginRight="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="30dp"
-            android:clickable="true"
-            android:background="@drawable/rect_button"/>
+            android:background="@drawable/main_background"/>
     </LinearLayout>
 </RelativeLayout>
