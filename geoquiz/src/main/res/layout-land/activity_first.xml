@@ -10,8 +10,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnNewGame"
         android:text="@string/new_game"
-        android:background="@drawable/main_background"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        style="@style/strokeButton"/>
     <Button
         android:layout_centerHorizontal="true"
         android:layout_above="@id/btnNewGame"
@@ -20,6 +20,6 @@
         android:id="@+id/btnContinueGame"
         android:text="@string/continue_game"
         android:layout_margin="5dp"
-        android:background="@drawable/main_background"/>
+        style="@style/strokeButton"/>
 
 </RelativeLayout>

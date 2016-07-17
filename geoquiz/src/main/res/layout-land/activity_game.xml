@@ -16,11 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginRight="20dp"
             android:id="@+id/btnAnswer"
             android:text="@string/show_answer_button"
             style="?android:buttonBarButtonStyle"/>
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -40,8 +38,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:padding="30dp"
-        android:paddingLeft="100dp"
         android:id="@+id/tvQuestions"
+        android:gravity="center_horizontal"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/rect_button"
@@ -55,7 +53,6 @@
         android:layout_below="@id/tvQuestions"
         android:id="@+id/linlayout1">
         <Button
-            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/true_button"
@@ -63,9 +60,8 @@
             android:layout_weight="1"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/main_background"/>
+            style="@style/strokeButton"/>
         <Button
-            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/false_button"
@@ -73,7 +69,7 @@
             android:layout_weight="1"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="5dp"
-            android:background="@drawable/main_background"/>
+            style="@style/strokeButton"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"
