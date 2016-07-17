@@ -1,17 +1,21 @@
 package com.junior.dwan.geoquiz;
 
+import java.util.UUID;
+
 /**
  * Created by Might on 25.01.2016.
  */
-public class TrueFalse {
+public class Fact {
     private int mQuestion;
-
     private boolean mTrueQuestion;
 
-    public TrueFalse(int question,boolean trueQuestion){
+
+
+    public Fact(int question, boolean trueQuestion){
         mQuestion=question;
         mTrueQuestion=trueQuestion;
     }
+
 
     public int getQuestion(){
         return mQuestion;

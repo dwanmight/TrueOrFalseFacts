@@ -1,13 +1,16 @@
 package com.junior.dwan.geoquiz;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.TypedArray;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.support.v4.app.NavUtils;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import android.widget.ToggleButton;
 
 public class GameActivity extends Activity {
 
@@ -22,14 +25,16 @@ public class GameActivity extends Activity {
     private static final String KEY_INDEX = "index";
     private static final String KEY_INTENT_DATA = "intentData";
     public static final String KEY_SCORE = "score";
+    private String[] arrayFacts;
+    private boolean[] arrayBoolean;
 
 
-    private TrueFalse[] mQuestionBank = new TrueFalse[]{
-            new TrueFalse(R.string.question_oceans, true),
-            new TrueFalse(R.string.question_mideast, false),
-            new TrueFalse(R.string.question_africa, false),
-            new TrueFalse(R.string.question_americas, true),
-            new TrueFalse(R.string.question_asia, true)
+    private Fact[] mQuestionBank = new Fact[]{
+            new Fact(R.string.question_oceans, true),
+            new Fact(R.string.question_mideast, false),
+            new Fact(R.string.question_africa, false),
+            new Fact(R.string.question_americas, true),
+            new Fact(R.string.question_asia, true)
     };
 
     private int mCurrentIndex = 0;
@@ -88,6 +93,13 @@ public class GameActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        // активация кнопки home
+        if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
+            if(NavUtils.getParentActivityName(this)!=null){
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+            }
+        }
+
         mIsCheater = false;
         if (savedInstanceState != null) {
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -129,7 +141,7 @@ public class GameActivity extends Activity {
                 answerIsTrue = mQuestionBank[mCurrentIndex].isTrueQuestion();
                 if(answerIsTrue) {
 
-                    mTrueButton.setBackgroundResource(R.drawable.answer_btn);
+                    mTrueButton.setBackgroundResource(R.drawable.main_background_answer);
                     mAnswerButton.setEnabled(false);
 //                    tvAnswer.setText(R.string.true_button);
                     mIsCheater=true;
@@ -138,7 +150,7 @@ public class GameActivity extends Activity {
                     mAnswerButton.setEnabled(false);
 //                    tvAnswer.setText(R.string.false_button);
                     mIsCheater=true;
-                    mFalseButton.setBackgroundResource(R.drawable.answer_btn);
+                    mFalseButton.setBackgroundResource(R.drawable.main_background_answer);
 
                 }
             }
@@ -155,5 +167,18 @@ public class GameActivity extends Activity {
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         savedInstanceState.putBoolean(KEY_INTENT_DATA, mIsCheater);
         savedInstanceState.putInt(KEY_SCORE,score);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                if (NavUtils.getParentActivityName(this)!=null){
+                    NavUtils.navigateUpFromSameTask(this);
+                }
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

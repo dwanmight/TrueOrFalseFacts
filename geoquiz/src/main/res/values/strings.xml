@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GeoQuiz</string>
+    <string name="app_name">True or False Facts</string>
 
     <string name="new_game">New Game</string>
     <string name="continue_game">Continue</string>
@@ -8,23 +8,39 @@
 
     <string name="false_button">False</string>
     <string name="true_button">True</string>
-    <string name="earned_2">You have earned 2 coins.</string>
-    <string name="incorrect_toast">Incorrect!</string>
+
+
     <string name="next_question_button">Next</string>
     <string name="point_textview">Read the facts below and pick true or false</string>
 
     <string name="cheat_button">Cheat!</string>
     <string name="warning_text">Are you sure to do that?</string>
     <string name="show_answer_button">Show answer</string>
-    <string name="earned_1">You have earned 1 coin.</string>
-    <string name="earned_0">You have earned 0 coins.</string>
-
+    <string name="earned_1">You had earned 1 point.</string>
+    <string name="earned_0">You had earned 0 points.</string>
+    <string name="earned_2">You had earned 2 points.</string>
 
     <string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>
     <string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>
     <string name="question_africa">The source of the Nile River is in Egypt.</string>
     <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
     <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
+
+    <array name="factsArray">
+    <item>@string/question_oceans</item>
+    <item>@string/question_mideast</item>
+    <item>@string/question_africa</item>
+    <item>@string/question_americas</item>
+    <item>@string/question_asia</item>
+    </array>
+
+    <array name="factsBoolean">
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+    </array>
 
 
 </resources>

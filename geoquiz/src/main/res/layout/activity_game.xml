@@ -12,7 +12,7 @@
         android:gravity="center"
         android:id="@+id/linlayout2">
         <Button
-            android:textSize="12sp"
+            android:textSize="@dimen/size_small_12"
             android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:layout_marginLeft="150dp"
-            android:textSize="12sp"
+            android:textSize="@dimen/size_small_12"
             android:text="@string/score"/>
     </LinearLayout>
 
@@ -51,19 +51,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:gravity="center"
         android:padding="30dp"
         android:id="@+id/tvQuestions"
         android:background="@drawable/rect_button"
+        android:textSize="@dimen/size_medium_16"
         android:layout_below="@+id/tvPoint"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="30dp"/>
-    <!--<View-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="3dp"-->
-        <!--android:background="@drawable/separator"-->
-        <!--android:layout_below="@id/tvQuestions"/>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -73,7 +68,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp">
         <Button
-            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/true_button"
@@ -82,17 +76,16 @@
             android:layout_marginRight="5dp"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/main_background"/>
+            style="@style/strokeButton"/>/>
         <Button
-            android:textSize="16sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/false_button"
             android:id="@+id/false_button"
-            android:layout_weight="1"
             android:layout_marginRight="30dp"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/main_background"/>
+            style="@style/strokeButton"
+            android:layout_weight="1"/>
     </LinearLayout>
 </RelativeLayout>

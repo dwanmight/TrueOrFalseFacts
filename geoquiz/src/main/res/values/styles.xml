@@ -6,7 +6,11 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:colorButtonNormal">#2196f3</item>
+    </style>
+
+    <style name="strokeButton" parent="AppTheme">
+        <item name="android:textSize">@dimen/size_large_20</item>
+        <item name="android:background">@drawable/main_background</item>
     </style>
 </resources>
 
