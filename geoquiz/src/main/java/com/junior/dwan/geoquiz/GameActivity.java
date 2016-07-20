@@ -1,7 +1,6 @@
 package com.junior.dwan.geoquiz;
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,30 +15,36 @@ import java.util.ArrayList;
 
 public class GameActivity extends Activity {
 
+
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mAnswerButton;
-    private TextView tvAnswer;
+    private TextView tvPoint;
     private TextView tvScore;
     private TextView mQuestionTextView;
     private boolean mIsCheater;
     private boolean answerIsTrue;
-    private static final String KEY_INDEX = "index";
-    private static final String KEY_INTENT_DATA = "intentData";
-    public static final String KEY_SCORE = "score";
     private ArrayList<Fact> mFacts;
+    private int mCurrentIndex=0;
+    private int score=0;
+    public static final String KEY_INDEX="index";
+    public static final String KEY_SCORE="score";
+    public static final String KEY_ANSWER="answer";
+    public static final String KEY_CHEAT ="cheat" ;
+    public static final String KEY_POINT ="point" ;
+    public static final String TAG ="tag";
+    int mesResId;
 
-
-//    private Fact[] mQuestionBank = new Fact[]{
-//            new Fact(R.string.question_oceans, true),
-//            new Fact(R.string.question_mideast, false),
-//            new Fact(R.string.question_africa, false),
-//            new Fact(R.string.question_americas, true),
-//            new Fact(R.string.question_asia, true)
-//    };
-
-    private int mCurrentIndex = 0;
-    private int score = 0;
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        Log.i("tag", "onSaveInstanceState");
+        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putInt(KEY_SCORE,score);
+        savedInstanceState.putBoolean(KEY_CHEAT, mIsCheater);
+        savedInstanceState.putBoolean(KEY_ANSWER,answerIsTrue);
+        savedInstanceState.putString(KEY_POINT,tvPoint.getText().toString());
+    }
 
     private void checkContinue() {
         Intent i = getIntent();
@@ -47,127 +52,125 @@ public class GameActivity extends Activity {
         else mCurrentIndex = i.getIntExtra(FirstActivity.EXTRA_START_GAME, 0);
     }
 
-
     private void updateQuestion() {
         String question = mFacts.get(mCurrentIndex).getQuestion();
         mQuestionTextView.setText(question);
-        mTrueButton.setBackgroundResource(R.drawable.main_background);
-        mFalseButton.setBackgroundResource(R.drawable.main_background);
+        mTrueButton.setBackgroundResource(R.drawable.btn_background);
+        mFalseButton.setBackgroundResource(R.drawable.btn_background);
+        checkAnswerColor();
         mAnswerButton.setEnabled(true);
         mIsCheater = false;
+        Log.i(TAG,"update");
     }
 
+    private void checkAnswerColor(){
+        if(mFacts.get(mCurrentIndex).isTrueQuestion()) mFalseButton.setBackgroundResource(R.drawable.btn_background_false);
+        else mTrueButton.setBackgroundResource(R.drawable.btn_background_false);
+    }
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
-        int mesResId = 0;
+        mesResId = 0;
         if (mIsCheater) {
             if (userPressedTrue == answerIsTrue) {
                 mesResId = R.string.earned_1;
                 score += 1;
                 tvScore.setText("Score: " + score);
-                tvAnswer.setText(mesResId);
-
+                tvPoint.setText(mesResId);
             } else {
                 mesResId = R.string.earned_0;
                 tvScore.setText("Score: " + score);
-                tvAnswer.setText(mesResId);
+                tvPoint.setText(mesResId);
             }
         } else {
             if (userPressedTrue == answerIsTrue) {
                 mesResId = R.string.earned_2;
                 score += 2;
                 tvScore.setText("Score: " + score);
-                tvAnswer.setText(mesResId);
+                tvPoint.setText(mesResId);
             } else {
                 mesResId = R.string.earned_0;
                 tvScore.setText("Score: " + score);
-                tvAnswer.setText(mesResId);
+                tvPoint.setText(mesResId);
             }
         }
-//        Toast.makeText(this, mesResId, Toast.LENGTH_SHORT).show();
     }
 
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+@Override
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         mFacts=FactLab.getInstance(this).getFacts();
+
+        mQuestionTextView = (TextView) findViewById(R.id.tvQuestions);
+        mTrueButton = (Button) findViewById(R.id.true_button);
+        mFalseButton = (Button) findViewById(R.id.false_button);
+        tvScore=(TextView)findViewById(R.id.tvScore);
+        tvPoint =(TextView)findViewById(R.id.tvPoint);
+        mAnswerButton = (Button) findViewById(R.id.btnAnswer);
+
+        updateQuestion();
+        Log.i(TAG, "--------------------------------");
+        Log.i(TAG,"boolean"+ mIsCheater);
         // активация кнопки home
         if(Build.VERSION.SDK_INT>Build.VERSION_CODES.HONEYCOMB){
             if(NavUtils.getParentActivityName(this)!=null){
             getActionBar().setDisplayHomeAsUpEnabled(true);
+                getActionBar().setSubtitle("TFFT");
             }
         }
 
-        mIsCheater = false;
-        if (savedInstanceState != null) {
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
-            mIsCheater = savedInstanceState.getBoolean(KEY_INTENT_DATA, false);
-            score = savedInstanceState.getInt(KEY_SCORE,0);
+        //load data
+        if(savedInstanceState!=null){
+            mCurrentIndex=savedInstanceState.getInt(KEY_INDEX);
+            score=savedInstanceState.getInt(KEY_SCORE);
+            mIsCheater=savedInstanceState.getBoolean(KEY_CHEAT);
+            answerIsTrue=savedInstanceState.getBoolean(KEY_ANSWER);
+
+            Log.i(TAG,"loadData");
+        } else {
+            checkContinue();
         }
-        score=0;
-        mQuestionTextView = (TextView) findViewById(R.id.tvQuestions);
-        mTrueButton = (Button) findViewById(R.id.true_button);
-        mFalseButton = (Button) findViewById(R.id.false_button);
+        checkAnswerColor();
+        tvScore.setText("Score: " + score);
+        mQuestionTextView.setText(mFacts.get(mCurrentIndex).getQuestion());
+
+        if(mIsCheater) {
+            Log.i(TAG,"boolean if cheat"+ mIsCheater);
+            if(answerIsTrue){
+                onAnswerTrue(mTrueButton);
+                Log.i(TAG,"boolean answer true");
+            } else {
+                onAnswerTrue(mFalseButton);
+                Log.i(TAG, "boolean answer false");
+            }
+        } else Log.i(TAG, "boolean if mtrue" + mIsCheater);
+
+
         mTrueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    checkAnswer(true);
-                mTrueButton.setBackgroundResource(R.drawable.main_background);
-                    mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
-                    updateQuestion();
-
+                checkAnswer(true);
+                mCurrentIndex = (mCurrentIndex + 1) % mFacts.size();
+                updateQuestion();
             }
         });
-
         mFalseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                     checkAnswer(false);
-                mFalseButton.setBackgroundResource(R.drawable.main_background);
-
                 mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
                     updateQuestion();
             }
         });
-        tvScore=(TextView)findViewById(R.id.tvScore);
-        tvScore.setText("Score: " + score);
-        tvAnswer=(TextView)findViewById(R.id.tvPoint);
-        mAnswerButton = (Button) findViewById(R.id.btnAnswer);
         mAnswerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
-                if(answerIsTrue) {
-
-                    mTrueButton.setBackgroundResource(R.drawable.main_background_answer);
-                    mAnswerButton.setEnabled(false);
-//                    tvAnswer.setText(R.string.true_button);
-                    mIsCheater=true;
-                }else {
-
-                    mAnswerButton.setEnabled(false);
-//                    tvAnswer.setText(R.string.false_button);
-                    mIsCheater=true;
-                    mFalseButton.setBackgroundResource(R.drawable.main_background_answer);
-
-                }
+                if (answerIsTrue) onAnswerTrue(mTrueButton);
+                else onAnswerTrue(mFalseButton);
             }
         });
-        checkContinue();
-        updateQuestion();
-    }
 
-
-
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
-        savedInstanceState.putBoolean(KEY_INTENT_DATA, mIsCheater);
-        savedInstanceState.putInt(KEY_SCORE,score);
     }
 
     @Override
@@ -180,6 +183,12 @@ public class GameActivity extends Activity {
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
 
+    public void onAnswerTrue(Button btn){
+        mAnswerButton.setEnabled(false);
+        mIsCheater=true;
+        btn.setBackgroundResource(R.drawable.btn_background_answer);
     }
 }
+

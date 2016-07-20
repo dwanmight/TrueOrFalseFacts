@@ -53,6 +53,7 @@
         android:layout_height="120dp"
         android:padding="30dp"
         android:id="@+id/tvQuestions"
+        android:gravity="center"
         android:background="@drawable/rect_button"
         android:textSize="@dimen/size_medium_16"
         android:layout_below="@+id/tvPoint"

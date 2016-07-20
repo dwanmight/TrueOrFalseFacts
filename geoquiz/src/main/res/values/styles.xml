@@ -9,8 +9,8 @@
     </style>
 
     <style name="strokeButton" parent="AppTheme">
-        <item name="android:textSize">@dimen/size_large_20</item>
-        <item name="android:background">@drawable/main_background</item>
+        <item name="android:textSize">@dimen/size_medium_16</item>
+        <item name="android:background">@drawable/btn_background</item>
     </style>
 </resources>
 
