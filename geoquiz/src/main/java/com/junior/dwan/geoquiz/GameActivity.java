@@ -121,6 +121,37 @@ public class GameActivity extends Activity {
         }
 
         //load data
+       loadSavedInstanceState(savedInstanceState);
+
+
+        mTrueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                checkAnswer(true);
+                mCurrentIndex = (mCurrentIndex + 1) % mFacts.size();
+                updateQuestion();
+            }
+        });
+        mFalseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    checkAnswer(false);
+                mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
+                    updateQuestion();
+            }
+        });
+        mAnswerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
+                if (answerIsTrue) onAnswerTrue(mTrueButton);
+                else onAnswerTrue(mFalseButton);
+            }
+        });
+
+    }
+
+    private void loadSavedInstanceState(Bundle savedInstanceState) {
         if(savedInstanceState!=null){
             mCurrentIndex=savedInstanceState.getInt(KEY_INDEX);
             score=savedInstanceState.getInt(KEY_SCORE);
@@ -149,33 +180,6 @@ public class GameActivity extends Activity {
                 Log.i(TAG, "boolean answer false");
             }
         } else Log.i(TAG, "boolean if mtrue" + mIsCheater);
-
-
-        mTrueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(true);
-                mCurrentIndex = (mCurrentIndex + 1) % mFacts.size();
-                updateQuestion();
-            }
-        });
-        mFalseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    checkAnswer(false);
-                mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
-                    updateQuestion();
-            }
-        });
-        mAnswerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
-                if (answerIsTrue) onAnswerTrue(mTrueButton);
-                else onAnswerTrue(mFalseButton);
-            }
-        });
-
     }
 
     @Override
