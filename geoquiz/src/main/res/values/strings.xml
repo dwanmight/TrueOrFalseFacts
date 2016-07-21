@@ -20,27 +20,129 @@
     <string name="earned_0">You had earned 0 points.</string>
     <string name="earned_2">You had earned 2 points.</string>
 
-    <string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>
-    <string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>
-    <string name="question_africa">The source of the Nile River is in Egypt.</string>
-    <string name="question_americas">The Amazon River is the longest river in the Americas.</string>
-    <string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>
+    <!--<string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>-->
+    <!--<string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>-->
+    <!--<string name="question_africa">The source of the Nile River is in Egypt.</string>-->
+    <!--<string name="question_americas">The Amazon River is the longest river in the Americas.</string>-->
+    <!--<string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>-->
 
-    <string-array name="factsArray">
-    <item>@string/question_oceans</item>
-    <item>@string/question_mideast</item>
-    <item>@string/question_africa</item>
-    <item>@string/question_americas</item>
-    <item>@string/question_asia</item>
-    </string-array>
+    <!--<string-array name="factsArray">-->
+    <!--<item>@string/question_oceans</item>-->
+    <!--<item>@string/question_mideast</item>-->
+    <!--<item>@string/question_africa</item>-->
+    <!--<item>@string/question_americas</item>-->
+    <!--<item>@string/question_asia</item>-->
+    <!--</string-array>-->
 
     <array name="factsBoolean">
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
         <item>true</item>
         <item>false</item>
         <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>true</item>
+        <item>false</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>true</item>
+        <item>false</item>
+        <item>true</item>
         <item>true</item>
         <item>true</item>
     </array>
+
+    <string-array name="factsArray">
+        <item>Ice Cream was first made in Italy.</item>
+        <item>Walt Disney, the creator of Mickey Mouse, was afraid of mice.</item>
+        <item>Bullet proof vests, fire escapes, windshield wipers, and laser printers were all invented by women.</item>
+        <item>Peanuts are one of the ingredients in dynamite. </item>
+        <item>Thomas Edison, lightbulb inventor, was afraid of the dark! </item>
+        <item>The inventor of the Waffle Iron did like waffles.</item>
+        <item>The Yo-Yo originated as toy for children	false</item>
+        <item>Bill Gates house was designed using a Macintosh computer. </item>
+        <item>Blueberry juice decreases memory. </item>
+        <item>When you take a step, you are using up to 200 muscles.</item>
+        <item>If two pieces of metal touch in space, they become permanently stuck together.</item>
+        <item>Coca Cola was originally orange.</item>
+        <item>Your fingernails grow faster in winter.</item>
+        <item>Cows can sleep standing up.</item>
+        <item>There are two golf balls sitting on the moon. </item>
+        <item>Cherophobia is a fear of fun.</item>
+        <item>In Kentucky, US, every citizen is required by law to take a bath at least once a year.</item>
+        <item>As a rule, 100 percent of people keep their eyes closed while kissing.</item>
+        <item>The Earth gets 100 tons heavier every day due to falling space dust.</item>
+        <item>The filming of the movie "Titanic" cost more than the Titanic itself!</item>
+        <item>The Mona Lisa has no eyebrows. </item>
+        <item>The world"'"s oldest known recipe is for cake. </item>
+        <item>It takes the food 30 minutes to get from your mouth to your stomach.</item>
+        <item>A toothpick is the object most often choked on by Americans.</item>
+        <item>You burn 26 calories in a one minute kiss.</item>
+        <item>30% of Chinese adults live with their parents.</item>
+        <item>Napoleon constructed his battle plans in a sandbox.</item>
+        <item>Your brain is 10% water.</item>
+        <item>The shortest war on record was 38 minutes.</item>
+        <item>Lobsters have blue blood.</item>
+        <item>The “Twilight Saga” is the most-shoplifted book in the world.</item>
+        <item>Donald Duck comics were banned from Finland because he doesn"'"t wear trousers.</item>
+        <item>Most elephants weigh less than a blue whale"'"s tongue.</item>
+        <item>On average people fear mice more than spiders.</item>
+        <item>Worms taste like bacon.</item>
+        <item>By weight, Bone is not stronger than steel. </item>
+        <item>If you keep a goldfish in the dark, it will eventually turn white.</item>
+        <item>Caffeine boosts memory.</item>
+        <item>Until the 1960"'"s men with long hair were not allowed to enter Disneyland.</item>
+        <item>The majority of suicides occur on a Monday.</item>
+        <item>95% of people feel uncomfortable when the TV volume is an odd number.</item>
+        <item>"Stewardesses" is not the longest word that is typed with only the left hand.</item>
+        <item>Flies are deaf.</item>
+        <item>Jellyfish as a species are actually older than dinosaurs and sharks.</item>
+        <item>A cow produces around 200,000 glasses of milk in her lifetime.</item>
+        <item>The great warrior Ghengis Khan died in bed while having sex.</item>
+        <item>A cat can jump twice as high as it is tall!</item>
+        <item>In ten minutes, a hurricane releases more energy than all the world"'"s nuclear weapons combined!</item>
+        <item>Eminem repeated the 9th grade three times.</item>
+        <item>The first foreigner to become a samurai was an African slave. </item>
+    </string-array>
 
 
 </resources>
