@@ -33,7 +33,7 @@ public class GameActivity extends Activity {
     public static final String KEY_CHEAT ="cheat" ;
     public static final String KEY_POINT ="point" ;
     public static final String TAG ="tag";
-    int mesResId;
+    private int mesResId=0;
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class GameActivity extends Activity {
         savedInstanceState.putInt(KEY_SCORE,score);
         savedInstanceState.putBoolean(KEY_CHEAT, mIsCheater);
         savedInstanceState.putBoolean(KEY_ANSWER,answerIsTrue);
-        savedInstanceState.putString(KEY_POINT,tvPoint.getText().toString());
+        savedInstanceState.putInt(KEY_POINT,mesResId);
     }
 
     private void checkContinue() {
@@ -60,6 +60,7 @@ public class GameActivity extends Activity {
         checkAnswerColor();
         mAnswerButton.setEnabled(true);
         mIsCheater = false;
+
         Log.i(TAG,"update");
     }
 
@@ -69,7 +70,7 @@ public class GameActivity extends Activity {
     }
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
-        mesResId = 0;
+//        mesResId = 0;
         if (mIsCheater) {
             if (userPressedTrue == answerIsTrue) {
                 mesResId = R.string.earned_1;
@@ -125,6 +126,7 @@ public class GameActivity extends Activity {
             score=savedInstanceState.getInt(KEY_SCORE);
             mIsCheater=savedInstanceState.getBoolean(KEY_CHEAT);
             answerIsTrue=savedInstanceState.getBoolean(KEY_ANSWER);
+            mesResId=savedInstanceState.getInt(KEY_POINT);
 
             Log.i(TAG,"loadData");
         } else {
@@ -133,6 +135,9 @@ public class GameActivity extends Activity {
         checkAnswerColor();
         tvScore.setText("Score: " + score);
         mQuestionTextView.setText(mFacts.get(mCurrentIndex).getQuestion());
+        if(mesResId==0){
+            tvPoint.setText(R.string.point_textview);
+        } else tvPoint.setText(mesResId);
 
         if(mIsCheater) {
             Log.i(TAG,"boolean if cheat"+ mIsCheater);
