@@ -13,8 +13,8 @@
     <string name="next_question_button">Next</string>
     <string name="point_textview">Read the facts below and pick true or false</string>
 
-    <string name="cheat_button">Cheat!</string>
-    <string name="warning_text">Are you sure to do that?</string>
+    <!--<string name="cheat_button">Cheat!</string>-->
+    <!--<string name="warning_text">Are you sure to do that?</string>-->
     <string name="show_answer_button">Show answer</string>
     <string name="earned_1">You had earned 1 point.</string>
     <string name="earned_0">You had earned 0 points.</string>

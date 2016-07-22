@@ -22,6 +22,7 @@ public class GameActivity extends Activity {
     private TextView tvPoint;
     private TextView tvScore;
     private TextView mQuestionTextView;
+    private TextView tvCountFacts;
     private boolean mIsCheater;
     private boolean answerIsTrue;
     private ArrayList<Fact> mFacts;
@@ -34,6 +35,7 @@ public class GameActivity extends Activity {
     public static final String KEY_POINT ="point" ;
     public static final String TAG ="tag";
     private int mesResId=0;
+    private int mCountFacts;
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
@@ -53,15 +55,22 @@ public class GameActivity extends Activity {
     }
 
     private void updateQuestion() {
-        String question = mFacts.get(mCurrentIndex).getQuestion();
-        mQuestionTextView.setText(question);
-        mTrueButton.setBackgroundResource(R.drawable.btn_background);
-        mFalseButton.setBackgroundResource(R.drawable.btn_background);
-        checkAnswerColor();
-        mAnswerButton.setEnabled(true);
-        mIsCheater = false;
+            if(mCurrentIndex<50) {
+                String question = mFacts.get(mCurrentIndex).getQuestion();
+                mQuestionTextView.setText(question);
+                mTrueButton.setBackgroundResource(R.drawable.btn_background);
+                mFalseButton.setBackgroundResource(R.drawable.btn_background);
+                mCountFacts = mCurrentIndex + 1;
+                tvCountFacts.setText(mCountFacts + " / " + mFacts.size());
+                checkAnswerColor();
+                mAnswerButton.setEnabled(true);
+                mIsCheater = false;
 
-        Log.i(TAG,"update");
+                Log.i(TAG, "update");
+            } else {
+        Intent i=new Intent(this,PassActivity.class);
+        startActivity(i);
+        }
     }
 
     private void checkAnswerColor(){
@@ -108,6 +117,7 @@ public class GameActivity extends Activity {
         tvScore=(TextView)findViewById(R.id.tvScore);
         tvPoint =(TextView)findViewById(R.id.tvPoint);
         mAnswerButton = (Button) findViewById(R.id.btnAnswer);
+        tvCountFacts=(TextView)findViewById(R.id.tvCountFacts);
 
         updateQuestion();
         Log.i(TAG, "--------------------------------");
@@ -128,7 +138,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 checkAnswer(true);
-                mCurrentIndex = (mCurrentIndex + 1) % mFacts.size();
+                mCurrentIndex = (mCurrentIndex + 1);
                 updateQuestion();
             }
         });
@@ -136,7 +146,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                     checkAnswer(false);
-                mCurrentIndex=(mCurrentIndex+1)%mFacts.size();
+                mCurrentIndex=(mCurrentIndex+1);
                     updateQuestion();
             }
         });
@@ -158,7 +168,8 @@ public class GameActivity extends Activity {
             mIsCheater=savedInstanceState.getBoolean(KEY_CHEAT);
             answerIsTrue=savedInstanceState.getBoolean(KEY_ANSWER);
             mesResId=savedInstanceState.getInt(KEY_POINT);
-
+            mCountFacts=mCurrentIndex+1;
+            tvCountFacts.setText(mCountFacts+" / "+mFacts.size());
             Log.i(TAG,"loadData");
         } else {
             checkContinue();

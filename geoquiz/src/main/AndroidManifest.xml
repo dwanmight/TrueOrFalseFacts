@@ -18,6 +18,10 @@
             <meta-data android:name="android.support.PARENT_ACTIVITY"
                        android:value=".FirstActivity"/>
         </activity>
+        <activity android:name=".PassActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value=".FirstActivity"/>
+        </activity>
     </application>
 
 </manifest>
