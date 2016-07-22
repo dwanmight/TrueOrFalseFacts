@@ -1,5 +1,6 @@
 package com.junior.dwan.geoquiz;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,7 +14,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class GameActivity extends Activity {
+public class GameActivity extends Activity implements View.OnClickListener {
 
 
     private Button mTrueButton;
@@ -69,6 +70,7 @@ public class GameActivity extends Activity {
                 Log.i(TAG, "update");
             } else {
         Intent i=new Intent(this,PassActivity.class);
+                i.putExtra(PassActivity.EXTRA_SCORE,score);
         startActivity(i);
         }
     }
@@ -134,30 +136,9 @@ public class GameActivity extends Activity {
        loadSavedInstanceState(savedInstanceState);
 
 
-        mTrueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkAnswer(true);
-                mCurrentIndex = (mCurrentIndex + 1);
-                updateQuestion();
-            }
-        });
-        mFalseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    checkAnswer(false);
-                mCurrentIndex=(mCurrentIndex+1);
-                    updateQuestion();
-            }
-        });
-        mAnswerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
-                if (answerIsTrue) onAnswerTrue(mTrueButton);
-                else onAnswerTrue(mFalseButton);
-            }
-        });
+        mTrueButton.setOnClickListener(this);
+        mFalseButton.setOnClickListener(this);
+        mAnswerButton.setOnClickListener(this);
 
     }
 
@@ -209,6 +190,29 @@ public class GameActivity extends Activity {
         mAnswerButton.setEnabled(false);
         mIsCheater=true;
         btn.setBackgroundResource(R.drawable.btn_background_answer);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.true_button:
+                checkAnswer(true);
+                mCurrentIndex = (mCurrentIndex + 1);
+                updateQuestion();
+                break;
+            case R.id.false_button:
+                checkAnswer(false);
+                mCurrentIndex=(mCurrentIndex+1);
+                updateQuestion();
+                break;
+            case R.id.btnAnswer:
+                answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
+                if (answerIsTrue) onAnswerTrue(mTrueButton);
+                else onAnswerTrue(mFalseButton);
+                break;
+            default:
+                break;
+        }
     }
 }
 

@@ -19,6 +19,14 @@
     <string name="earned_1">You had earned 1 point.</string>
     <string name="earned_0">You had earned 0 points.</string>
     <string name="earned_2">You had earned 2 points.</string>
+    <string name="return_menu">Main Menu</string>
+    <string name="pass_not_bad">Not Bad!</string>
+    <string name="pass_good">Good</string>
+    <string name="pass_excellent">Excellent</string>
+    <string name="pass_have">"You have "</string>
+    <string name="pass_not_bad_main">" point.\n You must read more!"</string>
+    <string name="pass_good_main">" point.\n You have some knowledge,\n but you can better!"</string>
+    <string name="pass_excellent_main">" point.\n You very curious!"</string>
 
     <!--<string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>-->
     <!--<string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>-->
