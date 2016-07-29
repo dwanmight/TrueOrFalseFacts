@@ -2,10 +2,6 @@ package com.junior.dwan.geoquiz;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.Date;
-import java.util.UUID;
-
 /**
  * Created by Might on 25.01.2016.
  */
