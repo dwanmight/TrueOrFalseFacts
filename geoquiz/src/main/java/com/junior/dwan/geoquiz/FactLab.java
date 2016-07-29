@@ -1,6 +1,7 @@
 package com.junior.dwan.geoquiz;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.util.Log;
 
