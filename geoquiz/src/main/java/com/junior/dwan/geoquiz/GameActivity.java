@@ -152,11 +152,10 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
         // activate button home
         getActionBar().setIcon(new ColorDrawable(0));
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.HONEYCOMB) {
-            if (NavUtils.getParentActivityName(this) != null) {
+        if (NavUtils.getParentActivityName(this) != null) {
                 getActionBar().setDisplayHomeAsUpEnabled(true);
-            }
         }
+
 
         //load data
         if (savedInstanceState != null) loadSavedInstanceState(savedInstanceState);
