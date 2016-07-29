@@ -44,10 +44,10 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="100dp"
         android:padding="30dp"
         android:id="@+id/tvQuestions"
-        android:gravity="center_horizontal"
+        android:gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:background="@drawable/rect_button"
@@ -83,7 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/tvQuestions"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/tvPoint"
         android:textSize="12sp"

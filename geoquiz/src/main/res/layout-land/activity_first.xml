@@ -3,6 +3,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/weather">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/highscore"
+        android:id="@+id/tvHighScore"
+        android:textSize="16dp"
+        android:layout_above="@id/btnContinueGame"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"/>
+    <Button
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/btnNewGame"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnContinueGame"
+        android:text="@string/continue_game"
+        android:layout_margin="5dp"
+        style="@style/strokeButton"/>
     <Button
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -14,12 +32,11 @@
         style="@style/strokeButton"/>
     <Button
         android:layout_centerHorizontal="true"
-        android:layout_above="@id/btnNewGame"
+        android:layout_below="@id/btnNewGame"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:id="@+id/btnContinueGame"
-        android:text="@string/continue_game"
+        android:id="@+id/btnReset"
+        android:text="@string/button_reset"
         android:layout_margin="5dp"
         style="@style/strokeButton"/>
-
 </RelativeLayout>

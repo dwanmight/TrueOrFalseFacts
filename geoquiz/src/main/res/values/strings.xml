@@ -27,6 +27,8 @@
     <string name="pass_not_bad_main">" point.\n You must read more!"</string>
     <string name="pass_good_main">" point.\n You have some knowledge,\n but you can better!"</string>
     <string name="pass_excellent_main">" point.\n You very curious!"</string>
+    <string name="highscore">"Highscore: "</string>
+    <string name="button_reset">Reset</string>
 
     <!--<string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>-->
     <!--<string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>-->
@@ -106,7 +108,7 @@
         <item>Peanuts are one of the ingredients in dynamite. </item>
         <item>Thomas Edison, lightbulb inventor, was afraid of the dark! </item>
         <item>The inventor of the Waffle Iron did like waffles.</item>
-        <item>The Yo-Yo originated as toy for children	false</item>
+        <item>The Yo-Yo originated as toy for children.</item>
         <item>Bill Gates house was designed using a Macintosh computer. </item>
         <item>Blueberry juice decreases memory. </item>
         <item>When you take a step, you are using up to 200 muscles.</item>
