@@ -30,20 +30,6 @@
     <string name="highscore">"Highscore: "</string>
     <string name="button_reset">Reset</string>
 
-    <!--<string name="question_oceans">The Pacific Ocean is larger than the Atlantic Ocean.</string>-->
-    <!--<string name="question_mideast">The Suez Canal connects the Red Sea and the Indian Ocean.</string>-->
-    <!--<string name="question_africa">The source of the Nile River is in Egypt.</string>-->
-    <!--<string name="question_americas">The Amazon River is the longest river in the Americas.</string>-->
-    <!--<string name="question_asia">Lake Baikal is the world\'s oldest and deepest freshwater lake.</string>-->
-
-    <!--<string-array name="factsArray">-->
-    <!--<item>@string/question_oceans</item>-->
-    <!--<item>@string/question_mideast</item>-->
-    <!--<item>@string/question_africa</item>-->
-    <!--<item>@string/question_americas</item>-->
-    <!--<item>@string/question_asia</item>-->
-    <!--</string-array>-->
-
     <array name="factsBoolean">
         <item>false</item>
         <item>true</item>
@@ -153,6 +139,4 @@
         <item>Eminem repeated the 9th grade three times.</item>
         <item>The first foreigner to become a samurai was an African slave. </item>
     </string-array>
-
-
 </resources>
