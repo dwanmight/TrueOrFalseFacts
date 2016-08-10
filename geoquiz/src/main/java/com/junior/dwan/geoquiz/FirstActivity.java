@@ -1,6 +1,9 @@
 package com.junior.dwan.geoquiz;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import android.widget.TextView;
  * Created by Might on 14.07.2016.
  */
 public class FirstActivity extends Activity implements View.OnClickListener {
+    private static final int DIALOG_RESET=1;
     private Button btnNewGame, btnContinueGame,btnReset;
     public static final String EXTRA_START_GAME="com.junior.dwan.geoquiz.start_game";
     private int sHighScore=0;
@@ -20,6 +24,7 @@ public class FirstActivity extends Activity implements View.OnClickListener {
     private TextView tvHighScore;
     private boolean pass;
     private SharedPreferences mPreferences;
+    Dialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +70,48 @@ public class FirstActivity extends Activity implements View.OnClickListener {
                 startActivity(i);
                 break;
             case R.id.btnReset:
-                sHighScore = 0;
-                tvHighScore.setText(getString(R.string.highscore) + sHighScore);
-                pass=false;
-                btnContinueGame.setEnabled(false);
+                    // вызываем диалог
+                   showDialog(DIALOG_RESET);
                 break;
         }
     }
+
+    protected Dialog onCreateDialog(int id){
+        if(id==DIALOG_RESET){
+            AlertDialog.Builder adb=new AlertDialog.Builder(this);
+            adb.setTitle(R.string.score_title);
+            adb.setMessage(R.string.score_text);
+            adb.setPositiveButton(R.string.score_ok, DialogListener);
+            adb.setNegativeButton(R.string.score_no, DialogListener);
+            adb.setNeutralButton(R.string.score_cancel, DialogListener);
+            adb.setIcon(android.R.drawable.ic_dialog_info);
+            return adb.create();
+        }
+        return super.onCreateDialog(id);
+    }
+
+    DialogInterface.OnClickListener DialogListener=new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick(DialogInterface dialog, int which) {
+            switch (which){
+                case Dialog.BUTTON_POSITIVE:
+                    resetScore();
+                    break;
+                case Dialog.BUTTON_NEGATIVE:
+                    dialog.dismiss();
+                case Dialog.BUTTON_NEUTRAL:
+                    dialog.cancel();
+            }
+        }
+    };
+
+    private void resetScore() {
+        sHighScore = 0;
+        tvHighScore.setText(getString(R.string.highscore) + sHighScore);
+        pass=false;
+        btnContinueGame.setEnabled(false);
+    }
+
 
     @Override
     protected void onStop() {

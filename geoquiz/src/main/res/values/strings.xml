@@ -6,6 +6,7 @@
     <string name="score">Score: </string>
 
 
+
     <string name="false_button">False</string>
     <string name="true_button">True</string>
 
@@ -13,8 +14,6 @@
     <string name="next_question_button">Next</string>
     <string name="point_textview">Read the facts below and pick true or false</string>
 
-    <!--<string name="cheat_button">Cheat!</string>-->
-    <!--<string name="warning_text">Are you sure to do that?</string>-->
     <string name="show_answer_button">Show answer</string>
     <string name="earned_1">You had earned 1 point.</string>
     <string name="earned_0">You had earned 0 points.</string>
@@ -139,4 +138,9 @@
         <item>Eminem repeated the 9th grade three times.</item>
         <item>The first foreigner to become a samurai was an African slave. </item>
     </string-array>
+    <string name="score_title">Reset score</string>
+    <string name="score_text">Do you want reset saved data?</string>
+    <string name="score_ok">Yes</string>
+    <string name="score_no">No</string>
+    <string name="score_cancel">Cancel</string>
 </resources>
