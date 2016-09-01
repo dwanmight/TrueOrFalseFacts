@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@drawable/weather">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/weather">
+
     <TextView
+        android:id="@+id/tvPassHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:layout_centerHorizontal="true"
         android:layout_above="@+id/tvPassMain"
-        android:id="@+id/tvPassHead"
+        android:layout_centerHorizontal="true"
+        android:text=""
         android:textSize="24dp"/>
+
     <TextView
+        android:id="@+id/tvPassMain"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:id="@+id/tvPassMain"
-        android:text=""
-        android:padding="24dp"
-        android:gravity="center"
-        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:layout_margin="40dp"
-        android:background="@drawable/rect_button"/>
+        android:background="@drawable/rect_button"
+        android:gravity="center"
+        android:padding="24dp"
+        android:text=""/>
+
     <Button
+        android:id="@+id/btnReturnMenu"
+        style="@style/strokeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnReturnMenu"
-        android:text="@string/return_menu"
         android:layout_below="@id/tvPassMain"
-        android:layout_margin="40dp"
         android:layout_centerHorizontal="true"
-        style="@style/strokeButton"
-        android:onClick="onClickReturn"/>
+        android:layout_margin="40dp"
+        android:onClick="onClickReturn"
+        android:text="@string/return_menu"/>
 </RelativeLayout>

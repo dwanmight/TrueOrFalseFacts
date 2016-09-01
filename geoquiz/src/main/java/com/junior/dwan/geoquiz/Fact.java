@@ -2,18 +2,19 @@ package com.junior.dwan.geoquiz;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
 /**
  * Created by Might on 25.01.2016.
  */
 public class Fact {
-    public static final String JSON_QUESTION="question";
-    public static final String JSON_ISTRUE="istrue";
+    public static final String JSON_QUESTION = "question";
+    public static final String JSON_ISTRUE = "istrue";
     private String mQuestion;
     private boolean mTrueQuestion;
 
-    public Fact(String question, boolean trueQuestion){
-        mQuestion=question;
-        mTrueQuestion=trueQuestion;
+    public Fact(String question, boolean trueQuestion) {
+        mQuestion = question;
+        mTrueQuestion = trueQuestion;
     }
 
     public JSONObject toJSON() throws JSONException {
@@ -24,15 +25,15 @@ public class Fact {
     }
 
     public Fact(JSONObject json) throws JSONException {
-       mQuestion = json.getString(JSON_QUESTION);
+        mQuestion = json.getString(JSON_QUESTION);
         mTrueQuestion = json.getBoolean(JSON_ISTRUE);
     }
 
-    public String getQuestion(){
+    public String getQuestion() {
         return mQuestion;
     }
 
-    public boolean isTrueQuestion(){
+    public boolean isTrueQuestion() {
         return mTrueQuestion;
     }
 }

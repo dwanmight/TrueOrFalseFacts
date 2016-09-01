@@ -1,4 +1,5 @@
 package com.junior.dwan.geoquiz;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -59,23 +61,23 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     private void checkContinue(Bundle bundle) {
         Intent i = getIntent();
-        if(bundle!=null){
+        if (bundle != null) {
             mFacts = FactLab.getInstance(this).getFacts();
-    }else if (i.getIntExtra(FirstActivity.EXTRA_START_GAME, 0) == 0) {
+        } else if (i.getIntExtra(FirstActivity.EXTRA_START_GAME, 0) == 0) {
             mFacts = FactLab.getInstance(this).loadNewFact(this);
             Collections.shuffle(mFacts);
             score = 0;
             mCurrentIndex = 0;
-        } else{
+        } else {
             mFacts = FactLab.getInstance(this).getFacts();
             mPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
             mCurrentIndex = mPreferences.getInt(SAVED_INDEX, 0);
             score = mPreferences.getInt(SAVED_SCORE, 0);
             mesResId = mPreferences.getInt(SAVED_POINT, 0);
-            answerIsTrue=mPreferences.getBoolean(SAVED_ANSWER, false);
-            mIsCheater=mPreferences.getBoolean(SAVED_CHEATER,false);
-            if(mIsCheater)mContCheater=true;
-            else mContCheater=false;
+            answerIsTrue = mPreferences.getBoolean(SAVED_ANSWER, false);
+            mIsCheater = mPreferences.getBoolean(SAVED_CHEATER, false);
+            if (mIsCheater) mContCheater = true;
+            else mContCheater = false;
         }
     }
 
@@ -89,8 +91,8 @@ public class GameActivity extends Activity implements View.OnClickListener {
             tvCountFacts.setText(mCountFacts + " / " + mFacts.size());
             checkAnswerColor();
             mAnswerButton.setEnabled(true);
-               if(mContCheater) mIsCheater=true;
-            else mIsCheater=false;
+            if (mContCheater) mIsCheater = true;
+            else mIsCheater = false;
         } else {
             pass = false;
             Intent i = new Intent(this, PassActivity.class);
@@ -108,7 +110,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mFacts.get(mCurrentIndex).isTrueQuestion();
-        mContCheater=false;
+        mContCheater = false;
         if (mIsCheater) {
             if (userPressedTrue == answerIsTrue) {
                 mesResId = R.string.earned_1;
@@ -151,7 +153,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         // activate button home
         getActionBar().setIcon(new ColorDrawable(0));
         if (NavUtils.getParentActivityName(this) != null) {
-                getActionBar().setDisplayHomeAsUpEnabled(true);
+            getActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
 
@@ -196,9 +198,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case android.R.id.home:
-                if (NavUtils.getParentActivityName(this)!=null){
+                if (NavUtils.getParentActivityName(this) != null) {
                     NavUtils.navigateUpFromSameTask(this);
                 }
                 return true;
@@ -206,16 +208,16 @@ public class GameActivity extends Activity implements View.OnClickListener {
         return super.onOptionsItemSelected(item);
     }
 
-    public void onAnswerTrue(Button btn){
+    public void onAnswerTrue(Button btn) {
         mAnswerButton.setEnabled(false);
-        mIsCheater=true;
-        mContCheater=false;
+        mIsCheater = true;
+        mContCheater = false;
         btn.setBackgroundResource(R.drawable.btn_background_answer);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.true_button:
                 checkAnswer(true);
                 mCurrentIndex = (mCurrentIndex + 1);
@@ -223,7 +225,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.false_button:
                 checkAnswer(false);
-                mCurrentIndex=(mCurrentIndex+1);
+                mCurrentIndex = (mCurrentIndex + 1);
                 updateQuestion();
                 break;
             case R.id.btnAnswer:
@@ -236,11 +238,11 @@ public class GameActivity extends Activity implements View.OnClickListener {
         }
     }
 
-    private void saveData(){
-        mPreferences=getSharedPreferences(SHARED_PREFERENCES,MODE_PRIVATE);
-        SharedPreferences.Editor editor=mPreferences.edit();
-        editor.putInt(SAVED_INDEX,mCurrentIndex);
-        editor.putInt(SAVED_SCORE,score);
+    private void saveData() {
+        mPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt(SAVED_INDEX, mCurrentIndex);
+        editor.putInt(SAVED_SCORE, score);
         editor.putInt(SAVED_POINT, mesResId);
         editor.putBoolean(SAVED_PASS, pass);
         editor.putBoolean(SAVED_CHEATER, mIsCheater);

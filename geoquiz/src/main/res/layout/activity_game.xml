@@ -2,95 +2,103 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:background="@drawable/weather">
+                android:background="@drawable/weather"
+                android:orientation="vertical">
+
     <LinearLayout
+        android:id="@+id/linlayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentTop="true"
-        android:id="@+id/linlayout2"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
         <Button
-            android:textSize="@dimen/size_small_12"
+            android:id="@+id/btnAnswer"
+            style="?android:buttonBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/btnAnswer"
+            android:layout_weight="1"
             android:text="@string/show_answer_button"
-            style="?android:buttonBarStyle"
-            android:layout_weight="1"/>
+            android:textSize="@dimen/size_small_12"/>
+
         <TextView
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
             android:id="@+id/tvCountFacts"
-            android:gravity="center_horizontal"
-            android:layout_weight="2"
-            android:layout_marginRight="10dp"/>
-        <TextView
             android:layout_width="40dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="2"
+            android:gravity="center_horizontal"/>
+
+        <TextView
             android:id="@+id/tvScore"
-            android:textSize="@dimen/size_small_12"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/score"
-            android:layout_weight="1"/>
+            android:textSize="@dimen/size_small_12"/>
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tvPoint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/point_textview"
-        android:id="@+id/tvPoint"
-        android:padding="24dp"
+        android:layout_below="@+id/separator"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
-        android:layout_below="@+id/separator"
-        android:layout_centerHorizontal="true"/>
+        android:padding="24dp"
+        android:text="@string/point_textview"/>
+
     <View
+        android:id="@+id/separator"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
-        android:id="@+id/separator"
-        android:background="@drawable/separator"
-        android:layout_below="@id/linlayout2"/>
+        android:layout_below="@id/linlayout2"
+        android:background="@drawable/separator"/>
 
     <TextView
+        android:id="@+id/tvQuestions"
         android:layout_width="match_parent"
         android:layout_height="140dp"
-        android:padding="30dp"
-        android:id="@+id/tvQuestions"
-        android:gravity="center"
-        android:background="@drawable/rect_button"
-        android:textSize="@dimen/size_medium_16"
         android:layout_below="@+id/tvPoint"
         android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="30dp"/>
+        android:background="@drawable/rect_button"
+        android:gravity="center"
+        android:padding="30dp"
+        android:textSize="@dimen/size_medium_16"/>
+
     <LinearLayout
+        android:id="@+id/linlayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_below="@id/tvQuestions"
-        android:id="@+id/linlayout1"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="30dp">
+        android:orientation="horizontal">
+
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/true_button"
             android:id="@+id/true_button"
-            android:layout_weight="1"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            style="@style/strokeButton"/>/>
-        <Button
+            style="@style/strokeButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/false_button"
-            android:id="@+id/false_button"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="5dp"
             android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:text="@string/true_button"/>/>
+
+        <Button
+            android:id="@+id/false_button"
             style="@style/strokeButton"
-            android:layout_weight="1"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:text="@string/false_button"/>
     </LinearLayout>
 </RelativeLayout>

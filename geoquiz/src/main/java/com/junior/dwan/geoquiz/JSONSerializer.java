@@ -2,9 +2,11 @@ package com.junior.dwan.geoquiz;
 
 
 import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONTokener;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -20,12 +22,13 @@ import java.util.ArrayList;
  */
 public class JSONSerializer {
 
-        private Context mContext;
-        private String mFilename;
-        public JSONSerializer(Context c, String f) {
-            mContext = c;
-            mFilename = f;
-        }
+    private Context mContext;
+    private String mFilename;
+
+    public JSONSerializer(Context c, String f) {
+        mContext = c;
+        mFilename = f;
+    }
 
     public ArrayList<Fact> loadFacts() throws IOException, JSONException {
         ArrayList<Fact> facts = new ArrayList<Fact>();
@@ -56,23 +59,23 @@ public class JSONSerializer {
         return facts;
     }
 
-        public void saveFacts(ArrayList<Fact> facts)
-                throws JSONException, IOException {
+    public void saveFacts(ArrayList<Fact> facts)
+            throws JSONException, IOException {
 // Построение массива в JSON
-            JSONArray array = new JSONArray();
-            for (Fact c : facts)
-                array.put(c.toJSON());
+        JSONArray array = new JSONArray();
+        for (Fact c : facts)
+            array.put(c.toJSON());
 // Запись файла на диск
-            Writer writer = null;
-            try {
-                OutputStream out = mContext
-                        .openFileOutput(mFilename, Context.MODE_PRIVATE);
-                writer = new OutputStreamWriter(out);
-                writer.write(array.toString());
-            } finally {
-                if (writer != null)
-                    writer.close();
-            }
+        Writer writer = null;
+        try {
+            OutputStream out = mContext
+                    .openFileOutput(mFilename, Context.MODE_PRIVATE);
+            writer = new OutputStreamWriter(out);
+            writer.write(array.toString());
+        } finally {
+            if (writer != null)
+                writer.close();
         }
+    }
 
 }
