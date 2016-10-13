@@ -30,9 +30,7 @@ public class FirstActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
-        btnNewGame = (Button) findViewById(R.id.btnNewGame);
-        btnContinueGame = (Button) findViewById(R.id.btnContinueGame);
-        btnReset = (Button) findViewById(R.id.btnReset);
+        initializeMainView();
 
         mPreferences = getSharedPreferences(ConstantManager.SHARED_PREFERENCES, MODE_PRIVATE);
         if (mPreferences.contains(ConstantManager.SAVED_PASS))
@@ -41,14 +39,19 @@ public class FirstActivity extends Activity implements View.OnClickListener {
             btnContinueGame.setEnabled(true);
         } else btnContinueGame.setEnabled(false);
 
-        tvHighScore = (TextView) findViewById(R.id.tvHighScore);
         sHighScore = getSharedPreferences("sPref", MODE_PRIVATE).getInt(ConstantManager.SAVED_HScore, 0);
         if (getIntent().getIntExtra(ConstantManager.EXTRA_HIGHSCORE, 0) > sHighScore) {
             sHighScore = getIntent().getIntExtra(ConstantManager.EXTRA_HIGHSCORE, 0);
         }
         tvHighScore.setText(getString(R.string.highscore) + sHighScore);
-
         setClickListener();
+    }
+
+    private void initializeMainView() {
+        btnNewGame = (Button) findViewById(R.id.btnNewGame);
+        btnContinueGame = (Button) findViewById(R.id.btnContinueGame);
+        btnReset = (Button) findViewById(R.id.btnReset);
+        tvHighScore = (TextView) findViewById(R.id.tvHighScore);
     }
 
 
@@ -117,14 +120,17 @@ public class FirstActivity extends Activity implements View.OnClickListener {
         btnContinueGame.setEnabled(false);
     }
 
-
-    @Override
-    protected void onStop() {
-        super.onStop();
+    private void savetoPreferences() {
         mPreferences = getSharedPreferences(ConstantManager.SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor ed = mPreferences.edit();
         ed.putInt(ConstantManager.SAVED_HScore, sHighScore);
         ed.putBoolean(ConstantManager.SAVED_PASS, pass);
         ed.apply();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        savetoPreferences();
     }
 }
