@@ -48,10 +48,9 @@ public class FirstActivity extends Activity implements View.OnClickListener {
         }
         tvHighScore.setText(getString(R.string.highscore) + sHighScore);
 
-        btnContinueGame.setOnClickListener(this);
-        btnNewGame.setOnClickListener(this);
-        btnReset.setOnClickListener(this);
+        setClickListener();
     }
+
 
     @Override
     public void onClick(View v) {
@@ -104,6 +103,12 @@ public class FirstActivity extends Activity implements View.OnClickListener {
             }
         }
     };
+
+    private void setClickListener() {
+        btnContinueGame.setOnClickListener(this);
+        btnNewGame.setOnClickListener(this);
+        btnReset.setOnClickListener(this);
+    }
 
     private void resetScore() {
         sHighScore = 0;
