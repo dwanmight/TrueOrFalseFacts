@@ -8,17 +8,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FirstActivity">
+        <activity android:name=".ui.activities.FirstActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".GameActivity">
+        <activity android:name=".ui.activities.GameActivity">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                       android:value=".FirstActivity"/>
+                       android:value=".ui.activities.FirstActivity"/>
         </activity>
-        <activity android:name=".PassActivity"
+        <activity android:name=".ui.activities.PassActivity"
             android:noHistory="true">
         </activity>
     </application>

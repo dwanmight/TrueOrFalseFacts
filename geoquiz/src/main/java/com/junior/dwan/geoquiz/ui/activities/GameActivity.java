@@ -1,4 +1,4 @@
-package com.junior.dwan.geoquiz;
+package com.junior.dwan.geoquiz.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,8 +12,26 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.junior.dwan.geoquiz.data.managers.FactLab;
+import com.junior.dwan.geoquiz.utils.ConstantManager;
+import com.junior.dwan.geoquiz.utils.Fact;
+import com.junior.dwan.geoquiz.R;
+
 import java.util.ArrayList;
 import java.util.Collections;
+
+import static com.junior.dwan.geoquiz.utils.ConstantManager.KEY_ANSWER;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.KEY_CHEAT;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.KEY_INDEX;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.KEY_POINT;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.KEY_SCORE;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SAVED_ANSWER;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SAVED_CHEATER;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SAVED_INDEX;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SAVED_PASS;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SAVED_POINT;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SAVED_SCORE;
+import static com.junior.dwan.geoquiz.utils.ConstantManager.SHARED_PREFERENCES;
 
 public class GameActivity extends Activity implements View.OnClickListener {
     private Button mTrueButton;
@@ -26,21 +44,9 @@ public class GameActivity extends Activity implements View.OnClickListener {
     private boolean mIsCheater;
     private boolean answerIsTrue;
     private ArrayList<Fact> mFacts;
-    private static int mCurrentIndex;
+    private  int mCurrentIndex;
     private int score;
-    public static final String KEY_INDEX = "index";
-    public static final String KEY_SCORE = "score";
-    public static final String KEY_ANSWER = "answer";
-    public static final String KEY_CHEAT = "cheat";
-    public static final String KEY_POINT = "point";
-    public static final String TAG = "tag";
-    public static final String SHARED_PREFERENCES = "sPref";
-    public static final String SAVED_INDEX = "saved_index";
-    public static final String SAVED_SCORE = "saved_score";
-    public static final String SAVED_POINT = "saved_point";
-    public static final String SAVED_PASS = "saved_pass";
-    public static final String SAVED_CHEATER = "saved_cheater";
-    public static final String SAVED_ANSWER = "saved_answer";
+
     private int mesResId = 0;
     private boolean pass;
     private int mCountFacts;
@@ -51,11 +57,11 @@ public class GameActivity extends Activity implements View.OnClickListener {
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         Log.i("tag", "onSaveInstanceState");
-        savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
-        savedInstanceState.putInt(KEY_SCORE, score);
-        savedInstanceState.putBoolean(KEY_CHEAT, mIsCheater);
-        savedInstanceState.putBoolean(KEY_ANSWER, answerIsTrue);
-        savedInstanceState.putInt(KEY_POINT, mesResId);
+        savedInstanceState.putInt(ConstantManager.KEY_INDEX, mCurrentIndex);
+        savedInstanceState.putInt(ConstantManager.KEY_SCORE, score);
+        savedInstanceState.putBoolean(ConstantManager.KEY_CHEAT, mIsCheater);
+        savedInstanceState.putBoolean(ConstantManager.KEY_ANSWER, answerIsTrue);
+        savedInstanceState.putInt(ConstantManager.KEY_POINT, mesResId);
         FactLab.getInstance(this).saveFacts();
     }
 
@@ -63,19 +69,19 @@ public class GameActivity extends Activity implements View.OnClickListener {
         Intent i = getIntent();
         if (bundle != null) {
             mFacts = FactLab.getInstance(this).getFacts();
-        } else if (i.getIntExtra(FirstActivity.EXTRA_START_GAME, 0) == 0) {
+        } else if (i.getIntExtra(ConstantManager.EXTRA_START_GAME, 0) == 0) {
             mFacts = FactLab.getInstance(this).loadNewFact(this);
             Collections.shuffle(mFacts);
             score = 0;
             mCurrentIndex = 0;
         } else {
             mFacts = FactLab.getInstance(this).getFacts();
-            mPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
-            mCurrentIndex = mPreferences.getInt(SAVED_INDEX, 0);
-            score = mPreferences.getInt(SAVED_SCORE, 0);
-            mesResId = mPreferences.getInt(SAVED_POINT, 0);
-            answerIsTrue = mPreferences.getBoolean(SAVED_ANSWER, false);
-            mIsCheater = mPreferences.getBoolean(SAVED_CHEATER, false);
+            mPreferences = getSharedPreferences(ConstantManager.SHARED_PREFERENCES, MODE_PRIVATE);
+            mCurrentIndex = mPreferences.getInt(ConstantManager.SAVED_INDEX, 0);
+            score = mPreferences.getInt(ConstantManager.SAVED_SCORE, 0);
+            mesResId = mPreferences.getInt(ConstantManager.SAVED_POINT, 0);
+            answerIsTrue = mPreferences.getBoolean(ConstantManager.SAVED_ANSWER, false);
+            mIsCheater = mPreferences.getBoolean(ConstantManager.SAVED_CHEATER, false);
             if (mIsCheater) mContCheater = true;
             else mContCheater = false;
         }
@@ -168,15 +174,15 @@ public class GameActivity extends Activity implements View.OnClickListener {
         } else tvPoint.setText(mesResId);
 
         if (mIsCheater) {
-            Log.i(TAG, "boolean if cheat" + mIsCheater);
+            Log.i(ConstantManager.TAG, "boolean if cheat" + mIsCheater);
             if (answerIsTrue) {
                 onAnswerTrue(mTrueButton);
-                Log.i(TAG, "boolean answer true");
+                Log.i(ConstantManager.TAG, "boolean answer true");
             } else {
                 onAnswerTrue(mFalseButton);
-                Log.i(TAG, "boolean answer false");
+                Log.i(ConstantManager.TAG, "boolean answer false");
             }
-        } else Log.i(TAG, "boolean if mtrue" + mIsCheater);
+        } else Log.i(ConstantManager.TAG, "boolean if mtrue" + mIsCheater);
 
         mTrueButton.setOnClickListener(this);
         mFalseButton.setOnClickListener(this);
@@ -186,14 +192,14 @@ public class GameActivity extends Activity implements View.OnClickListener {
 
     private void loadSavedInstanceState(Bundle savedInstanceState) {
         mFacts = FactLab.getInstance(this).getFacts();
-        mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
-        score = savedInstanceState.getInt(KEY_SCORE);
-        mIsCheater = savedInstanceState.getBoolean(KEY_CHEAT);
-        answerIsTrue = savedInstanceState.getBoolean(KEY_ANSWER);
-        mesResId = savedInstanceState.getInt(KEY_POINT);
+        mCurrentIndex = savedInstanceState.getInt(ConstantManager.KEY_INDEX);
+        score = savedInstanceState.getInt(ConstantManager.KEY_SCORE);
+        mIsCheater = savedInstanceState.getBoolean(ConstantManager.KEY_CHEAT);
+        answerIsTrue = savedInstanceState.getBoolean(ConstantManager.KEY_ANSWER);
+        mesResId = savedInstanceState.getInt(ConstantManager.KEY_POINT);
         mCountFacts = mCurrentIndex + 1;
         tvCountFacts.setText(mCountFacts + " / " + mFacts.size());
-        Log.i(TAG, "loadInstate");
+        Log.i(ConstantManager.TAG, "loadInstate");
     }
 
     @Override
@@ -239,17 +245,17 @@ public class GameActivity extends Activity implements View.OnClickListener {
     }
 
     private void saveData() {
-        mPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        mPreferences = getSharedPreferences(ConstantManager.SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putInt(SAVED_INDEX, mCurrentIndex);
-        editor.putInt(SAVED_SCORE, score);
-        editor.putInt(SAVED_POINT, mesResId);
-        editor.putBoolean(SAVED_PASS, pass);
-        editor.putBoolean(SAVED_CHEATER, mIsCheater);
-        editor.putBoolean(SAVED_ANSWER, answerIsTrue);
+        editor.putInt(ConstantManager.SAVED_INDEX, mCurrentIndex);
+        editor.putInt(ConstantManager.SAVED_SCORE, score);
+        editor.putInt(ConstantManager.SAVED_POINT, mesResId);
+        editor.putBoolean(ConstantManager.SAVED_PASS, pass);
+        editor.putBoolean(ConstantManager.SAVED_CHEATER, mIsCheater);
+        editor.putBoolean(ConstantManager.SAVED_ANSWER, answerIsTrue);
         editor.apply();
-        Log.i(TAG, "saved pass " + pass);
-        Log.i(TAG, "saved DATA GAME");
+        Log.i(ConstantManager.TAG, "saved pass " + pass);
+        Log.i(ConstantManager.TAG, "saved DATA GAME");
     }
 
     @Override
@@ -257,7 +263,7 @@ public class GameActivity extends Activity implements View.OnClickListener {
         super.onPause();
         saveData();
         FactLab.getInstance(this).saveFacts();
-        Log.i(TAG, "onPause");
+        Log.i(ConstantManager.TAG, "onPause");
     }
 }
 

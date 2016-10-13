@@ -1,4 +1,4 @@
-package com.junior.dwan.geoquiz;
+package com.junior.dwan.geoquiz.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,15 +7,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.junior.dwan.geoquiz.R;
+import com.junior.dwan.geoquiz.ui.activities.FirstActivity;
+import com.junior.dwan.geoquiz.utils.ConstantManager;
+
 /**
  * Created by Might on 22.07.2016.
  */
 public class PassActivity extends Activity {
-    public static final String EXTRA_SCORE = "score";
     TextView tvHead, tvMain;
     Button btnReturnMenu;
     private int score;
-    public static final String EXTRA_HIGHSCORE = "highscore";
     Intent i;
 
     @Override
@@ -27,7 +29,7 @@ public class PassActivity extends Activity {
         btnReturnMenu = (Button) findViewById(R.id.btnReturnMenu);
 
         Intent i = getIntent();
-        score = i.getIntExtra(EXTRA_SCORE, 0);
+        score = i.getIntExtra(ConstantManager.EXTRA_SCORE, 0);
         if (score >= 0 && score <= 40) {
             tvHead.setText(R.string.pass_not_bad);
             tvMain.setText((getString(R.string.pass_have)) + score + getString(R.string.pass_not_bad_main));
@@ -45,7 +47,7 @@ public class PassActivity extends Activity {
 
     public void onClickReturn(View v) {
         i = new Intent(this, FirstActivity.class);
-        i.putExtra(EXTRA_HIGHSCORE, score);
+        i.putExtra(ConstantManager.EXTRA_HIGHSCORE, score);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(i);
         finish();

@@ -1,7 +1,9 @@
-package com.junior.dwan.geoquiz;
+package com.junior.dwan.geoquiz.utils;
 
 
 import android.content.Context;
+
+import com.junior.dwan.geoquiz.utils.Fact;
 
 import org.json.JSONArray;
 import org.json.JSONException;

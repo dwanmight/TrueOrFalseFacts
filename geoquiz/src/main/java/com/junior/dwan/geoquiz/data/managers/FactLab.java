@@ -1,8 +1,12 @@
-package com.junior.dwan.geoquiz;
+package com.junior.dwan.geoquiz.data.managers;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.Log;
+
+import com.junior.dwan.geoquiz.utils.Fact;
+import com.junior.dwan.geoquiz.R;
+import com.junior.dwan.geoquiz.utils.JSONSerializer;
 
 import java.util.ArrayList;
 
